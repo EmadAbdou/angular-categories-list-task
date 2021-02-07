@@ -1,0 +1,108 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "name": "Food Products"
+    },
+    {
+      "id": 2,
+      "name": "Products"
+    },
+    {
+      "id": 3,
+      "name": "Food"
+    },
+    {
+      "id": "f277009d-5125-4ba4-81c8-6fbc308bf232",
+      "name": "Electronic",
+      "subCategories": ""
+    }
+  ],
+  "subCategories": [
+    {
+      "id": "1",
+      "name": "Food",
+      "mainCategoryId": "1"
+    },
+    {
+      "id": "3",
+      "name": "Deserts",
+      "mainCategoryId": "1"
+    },
+    {
+      "id": "2",
+      "name": "Deserts",
+      "mainCategoryId": "2"
+    },
+    {
+      "id": "f06611f7-49f0-4a45-bd06-a5dd6a28e86a",
+      "mainCategoryId": 3,
+      "name": "Apples"
+    }
+  ],
+  "products": [
+    {
+      "id": "2",
+      "subCategoryId": "2",
+      "code": "345",
+      "name": "cake",
+      "price": "200"
+    },
+    {
+      "id": "3",
+      "name": "Apples",
+      "code": "345",
+      "price": "200",
+      "subCategoryId": "2"
+    },
+    {
+      "id": "948c980b-d547-43ef-bd0c-39432b36d97b",
+      "name": "Banana",
+      "code": "334",
+      "price": "222",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "e611c554-8c38-467c-8f87-bbbc62cf81eb",
+      "name": "Tomato",
+      "code": "778",
+      "price": "120",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "948c98b-d547-43ef-bd0c-39432b36d97b",
+      "name": "Banana3",
+      "code": "334",
+      "price": "222",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "e611c54-8c38-467c-8f87-bbbc62cf81eb",
+      "name": "Tomatooo",
+      "code": "778",
+      "price": "120",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "948c8b-d547-43ef-bd0c-39432b36d97b",
+      "name": "Banana5",
+      "code": "334",
+      "price": "222",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "e611c54-8c38-467c-8f87-bbc62cf81eb",
+      "name": "Tomato6",
+      "code": "778",
+      "price": "120",
+      "subCategoryId": "1"
+    },
+    {
+      "id": "9b01d201-2b85-4cdf-8c02-90e745833c72",
+      "name": "Banana7",
+      "code": "3347",
+      "price": "222",
+      "subCategoryId": "1"
+    }
+  ]
+}

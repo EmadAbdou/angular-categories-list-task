@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row content-row">
+        <div class="col-lg-8 col-md-8 col-sm-12 m-auto">
+            <div class="row head">
+                <h3>All Categories</h3>
+                <button class="btn add-btn" (click)="openAddCategoryModal(addMainCategoryContent)">Add Category</button>
+            </div>
+            <div class="row data" *ngIf="mainCategoriesData && !mainCategoriesLoader">
+                <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                    <ngb-panel *ngFor="let mainCategory of mainCategoriesData" [title]="mainCategory.name">
+                        <ng-template ngbPanelContent>
+                            <div class="top-part">
+                                <h6>Sub Categories</h6>
+                                <button class="btn add-btn" (click)="openAddSubCategoryModal(addSubCategoryContent, mainCategory.id)">Add Sub Category</button>
+                            </div>
+                            <div class="sub-categories-part" *ngIf="mainCategory.subCategories">
+                                <div class="list-group">
+                                    <a *ngFor="let subCategory of mainCategory.subCategories" (click)="openCategoryPage(subCategory.id)" class="list-group-item list-group-item-action" aria-current="true">
+                                      {{ subCategory.name }}
+                                    </a>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+            </div>
+            <div class="row loading" *ngIf="mainCategoriesLoader">
+                <div id="loading"></div>
+            </div>
+            <div class="row no-data-row" *ngIf="!mainCategoriesData && !mainCategoriesLoader">
+                <div class="no-data">
+                    <img src="assets/imgs/empty-state-img.svg" alt="">
+                    <p class="text">You Don't Have Categories, Please Add Some!</p>
+                    <button class="btn add-btn" (click)="openAddCategoryModal(addMainCategoryContent)">Add Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #addMainCategoryContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Category</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="catergoryName">Category Name</label>
+                <div class="input-group">
+                    <input type="text" [(ngModel)]="newCategory.name" class="form-control" name="catergoryName" id="catergoryName">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn save-btn" (click)="modal.close()">Save</button>
+        <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #addSubCategoryContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Sub Category</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="subCatergoryName">Sub Category Name</label>
+                <div class="input-group">
+                    <input type="text" [(ngModel)]="newSubCategory.name" class="form-control" name="subCatergoryName" id="subCatergoryName">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn save-btn" (click)="modal.close()">Save</button>
+        <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
+    </div>
+</ng-template>

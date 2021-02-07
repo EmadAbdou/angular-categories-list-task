@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #fafafa;
+}
+
+.card-header {
+    padding: 0;
+    padding-top: .7em;
+    padding-bottom: .7em;
+}
+
+.card-header .btn {
+    width: 100%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+    text-align: start;
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+.page-item.active .page-link {
+    background-color: #11698e;
+    border-color: #11698e;
+}

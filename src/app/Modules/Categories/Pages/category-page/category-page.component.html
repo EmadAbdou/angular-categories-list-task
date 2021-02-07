@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="row content-row">
+        <div class="col-lg-8 col-md-8 col-sm-12 m-auto" *ngIf="categoryData">
+            <div class="row head">
+                <h3>{{ categoryData[0].name }}</h3>
+                <div class="action-btns">
+                    <button class="btn add-btn mr-2" (click)="openAddProductModal(addProductContent)">Add Product</button>
+                    <button class="btn btn-danger" *ngIf="selectedProductsIds.length > 0" (click)="deleteItems()">Delete
+            Selected</button>
+                </div>
+            </div>
+            <div class="row data-row" *ngIf="categoryProducts && !productsLoader">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                            </th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Price</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of categoryProducts ">
+                            <th scope="row">
+                                <input type="checkbox" (click)="selectProduct($event, product.id)">
+                            </th>
+                            <td>
+                                {{ product.name }}
+                            </td>
+                            <td>{{ product.code }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>
+                                <button class="btn btn-info" (click)="openEditProductModal(editProductContent, product)">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center pagination p-2">
+                    <ngb-pagination [collectionSize]="productsSize" [pageSize]="pageSize" [(page)]="page" (pageChange)="paginate($event)">
+                    </ngb-pagination>
+                </div>
+
+            </div>
+
+            <div class="row loading" *ngIf="productsLoader">
+                <div id="loading"></div>
+            </div>
+
+            <div class="row no-data-row" *ngIf="!categoryProducts && !productsLoader">
+                <div class="no-data">
+                    <img src="assets/imgs/empty-state-img.svg" alt="">
+                    <p class="text">You Don't Have Products, Please Add Some!</p>
+                    <button class="btn add-btn" (click)="openAddProductModal(addProductContent)">Add Category</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #addProductContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Product</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <div class="input-group">
+                    <input type="text" [(ngModel)]="product.name" class="form-control" name="productName" id="productName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productCode">Product Code</label>
+                <div class="input-group">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="product.code" class="form-control" name="productCode" id="productCode">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Product Price</label>
+                <div class="input-group">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="product.price" class="form-control" name="productPrice" id="productPrice">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn save-btn" (click)="modal.close()">Save</button>
+        <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #editProductContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <div class="input-group">
+                    <input type="text" [(ngModel)]="product.name" class="form-control" name="productName" id="productName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productCode">Product Code</label>
+                <div class="input-group">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="product.code" class="form-control" name="productCode" id="productCode">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Product Price</label>
+                <div class="input-group">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="product.price" class="form-control" name="productPrice" id="productPrice">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn save-btn" (click)="modal.close()">Save</button>
+        <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
+    </div>
+</ng-template>
