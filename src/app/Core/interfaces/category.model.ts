@@ -5,5 +5,4 @@ export interface Category {
   id: string;
   mainCategoryId: string;
   name: string;
-  products: any
 }

@@ -29,7 +29,6 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     id: '',
     mainCategoryId: '',
     name: '',
-    products: ''
   }
 
   constructor(
@@ -49,8 +48,11 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     this.categoriesSub = this.categoriesService.getAllCategories().pipe(
       mergeMap(categories => forkJoin(categories.map((category) => this.categoriesService.getSubCategory(category.id)
         .pipe(map(subCategories => {
+          console.log(subCategories);
+          console.log('sxxx')
           category['subCategories'] = subCategories.filter(subCategory => subCategory.mainCategoryId == category.id);
-          console.log(subCategories)
+          console.log(subCategories);
+          console.log('sss');
           return category;
         }))
       )))

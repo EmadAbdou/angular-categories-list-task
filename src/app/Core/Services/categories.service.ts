@@ -31,6 +31,12 @@ export class CategoriesService {
   }
 
   getSubCategory(categoryId) {
+    return this.http.get<Category>(`${this.apiUrl}/subCategories?mainCategoryId=${categoryId}`).pipe(
+      delay(500)
+    );
+  }
+
+  getSubCategoryDetails(categoryId) {
     return this.http.get<Category>(`${this.apiUrl}/subCategories?id=${categoryId}`).pipe(
       delay(500)
     );

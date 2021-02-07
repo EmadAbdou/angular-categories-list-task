@@ -47,7 +47,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
   }
 
   getCategoryData(categoryId) {
-    this.categoriesService.getSubCategory(categoryId).subscribe((category: Category) => {
+    this.categoriesService.getSubCategoryDetails(categoryId).subscribe((category: Category) => {
       if (category) {
         this.categoryData = category;
         console.log(this.categoryData[0].name)
