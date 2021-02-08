@@ -1,6 +1,9 @@
 <div class="container">
     <div class="row content-row">
         <div class="col-lg-8 col-md-8 col-sm-12 m-auto" *ngIf="categoryData">
+
+            <!-- Sub Category Head Start -->
+
             <div class="row head">
                 <h3>{{ categoryData[0].name }}</h3>
                 <div class="action-btns">
@@ -9,6 +12,11 @@
             Selected</button>
                 </div>
             </div>
+
+            <!-- Sub Category Head End -->
+
+            <!-- Products Data Row Start -->
+
             <div class="row data-row" *ngIf="categoryProducts && categoryProducts.length > 0 && !productsLoader">
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -44,9 +52,17 @@
 
             </div>
 
+            <!-- Products Data Row End  -->
+
+            <!-- Products Loader Start -->
+
             <div class="row loading" *ngIf="productsLoader">
                 <div id="loading"></div>
             </div>
+
+            <!-- Products Loader End -->
+
+            <!-- Products Empty State Start -->
 
             <div class="row no-data-row" *ngIf="categoryProducts && categoryProducts.length <= 0 && !productsLoader">
                 <div class="no-data">
@@ -56,9 +72,13 @@
                 </div>
             </div>
 
+            <!-- Products Empty State End -->
+
         </div>
     </div>
 </div>
+
+<!-- Add Product Modal Start -->
 
 <ng-template #addProductContent let-modal>
     <div class="modal-header">
@@ -96,6 +116,11 @@
     </div>
 </ng-template>
 
+<!-- Add Product Modal End -->
+
+
+<!-- Edit Product Modal Start -->
+
 <ng-template #editProductContent let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
@@ -131,3 +156,5 @@
         <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
     </div>
 </ng-template>
+
+<!-- Edit Product Modal End -->

@@ -7,6 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { v4 as uuid } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-page',
@@ -15,10 +16,17 @@ import { v4 as uuid } from 'uuid';
 })
 export class CategoryPageComponent implements OnInit, OnDestroy {
 
+  // Category Variables
   categoryId;
   categoryData: Category;
-  productsLoader = true;
+  categoryDataSub: Subscription;
+
+  // Products Variables
   categoryProducts: Product[];
+  categoryProductsSub: Subscription;
+  productsLoader = true;
+
+  // Placeholder Product Object
   product: Product = {
     id: '',
     name: '',
@@ -26,7 +34,11 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     price: '',
     subCategoryId: ''
   }
+
+  // Selected Products For Delete
   selectedProductsIds = [];
+
+  // Pagination Variables
   page = 1;
   pageSize = 4;
   productsSize;
@@ -47,30 +59,17 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
   }
 
   getCategoryData(categoryId) {
-    this.categoriesService.getSubCategoryDetails(categoryId).subscribe((category: Category) => {
+    this.categoryDataSub = this.categoriesService.getSubCategoryDetails(categoryId).subscribe((category: Category) => {
       if (category) {
         this.categoryData = category;
-        console.log(this.categoryData[0].name)
         this.getCategoryProducts(this.page);
       }
     })
   }
 
-  openAddProductModal(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.product.id = uuid();
-      this.product.subCategoryId = this.categoryId;
-      this.addNewProduct(this.product);
-    }, (reason) => {
-      // console.log('reson');
-      // console.log(reason);
-    });
-  }
-
   getCategoryProducts(page) {
-    console.log(page);
     this.productsLoader = true;
-    this.productService.getProducts(page).pipe(
+    this.categoryProductsSub = this.productService.getProducts(page).pipe(
       map(res => {
         let products = res.body;
         this.productsSize = res.headers.get('X-Total-Count');
@@ -80,12 +79,22 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     ).subscribe((result: Product[]) => {
       if (result) {
         this.categoryProducts = result;
-        console.log(this.categoryProducts);
-        // this.productsSize = this.categoryProducts.length;
         this.productsLoader = false;
       }
 
     })
+  }
+
+  // Add Product
+
+  openAddProductModal(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.product.id = uuid();
+      this.product.subCategoryId = this.categoryId;
+      this.addNewProduct(this.product);
+    }, (reason) => {
+      // Handle Error Here
+    });
   }
 
   addNewProduct(productData) {
@@ -103,6 +112,8 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     })
   }
 
+  // Edit Product
+
   openEditProductModal(content, product) {
     this.product.name = product.name;
     this.product.code = product.code;
@@ -111,8 +122,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     this.modalService.open(content).result.then((result) => {
       this.editProduct( product.id, this.product);
     }, (reason) => {
-      // console.log('reson');
-      // console.log(reason);
+      // Handle Error Here
     });
 
   }
@@ -133,6 +143,8 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  // Delete Products
 
   selectProduct(event, productId) {
     if (event.target.checked == true) {
@@ -159,7 +171,12 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    if (this.categoryDataSub) {
+      this.categoryDataSub.unsubscribe();
+    }
+    if (this.categoryProductsSub) {
+      this.categoryProductsSub.unsubscribe();
+    }
   }
 
 }

@@ -25,6 +25,11 @@
       "id": "238c54c2-23c3-43f6-893e-21c46f32bdee",
       "mainCategoryId": "ab4c448b-4f10-4c0e-aad0-0f9cf223bb41",
       "name": "Phones"
+    },
+    {
+      "id": "8d4ea487-4661-427b-8d3a-7e16eb0a7f8d",
+      "mainCategoryId": "ab4c448b-4f10-4c0e-aad0-0f9cf223bb41",
+      "name": "laptops"
     }
   ],
   "products": [

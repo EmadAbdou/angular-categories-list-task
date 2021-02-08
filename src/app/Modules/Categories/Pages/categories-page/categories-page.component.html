@@ -5,6 +5,9 @@
                 <h3>All Categories</h3>
                 <button class="btn add-btn" (click)="openAddCategoryModal(addMainCategoryContent)">Add Category</button>
             </div>
+
+            <!-- Categories Data Row Start -->
+
             <div class="row data" *ngIf="mainCategoriesData && !mainCategoriesLoader">
                 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
                     <ngb-panel *ngFor="let mainCategory of mainCategoriesData" [title]="mainCategory.name">
@@ -16,17 +19,27 @@
                             <div class="sub-categories-part" *ngIf="mainCategory.subCategories">
                                 <div class="list-group">
                                     <a *ngFor="let subCategory of mainCategory.subCategories" (click)="openCategoryPage(subCategory.id)" class="list-group-item list-group-item-action" aria-current="true">
-                                      {{ subCategory.name }}
-                                    </a>
+                    {{ subCategory.name }}
+                  </a>
                                 </div>
                             </div>
                         </ng-template>
                     </ngb-panel>
                 </ngb-accordion>
             </div>
+
+            <!-- Categories Data Row End -->
+
+            <!-- Categories Loader Start -->
+
             <div class="row loading" *ngIf="mainCategoriesLoader">
                 <div id="loading"></div>
             </div>
+
+            <!-- Categories Loader End -->
+
+            <!-- Categories Empty State Start -->
+
             <div class="row no-data-row" *ngIf="!mainCategoriesData && !mainCategoriesLoader">
                 <div class="no-data">
                     <img src="assets/imgs/empty-state-img.svg" alt="">
@@ -34,9 +47,14 @@
                     <button class="btn add-btn" (click)="openAddCategoryModal(addMainCategoryContent)">Add Category</button>
                 </div>
             </div>
+
+            <!-- Categories Empty State End -->
         </div>
     </div>
 </div>
+
+
+<!-- Add Main Category Modal Start -->
 
 <ng-template #addMainCategoryContent let-modal>
     <div class="modal-header">
@@ -58,6 +76,10 @@
     </div>
 </ng-template>
 
+<!-- Add Main Category Modal End -->
+
+<!-- Add Sub Category Modal Start -->
+
 <ng-template #addSubCategoryContent let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Add Sub Category</h4>
@@ -77,3 +99,5 @@
         <button type="button" class="btn cancel-btn" (click)="modal.dismiss()">Cancel</button>
     </div>
 </ng-template>
+
+<!-- Add Sub Category Modal End -->

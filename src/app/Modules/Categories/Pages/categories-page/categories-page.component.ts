@@ -42,6 +42,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
   }
 
   // Get Main Categories With Subcategories
+  // It's little complex due to json server file structure
 
   getCategoriesData() {
     this.mainCategoriesLoader = true;
@@ -63,18 +64,18 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
   }
 
 
-  // Add Main Category
+  // Add Main Category Modal
 
   openAddCategoryModal(content) {
     this.modalService.open(content).result.then((result) => {
       this.newCategory.id = uuid();
       this.addNewCategory(this.newCategory);
     }, (reason) => {
-      // console.log('reson');
-      // console.log(reason);
+      // Handle Error Here
     });
   }
 
+  // Add Main Category Function
 
   addNewCategory(categoryData) {
     this.categoriesService.addMainCategory(categoryData).subscribe((result: MainCategory) => {
@@ -85,7 +86,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  // Add Subcategory
+  // Add Subcategory Modal
 
   openAddSubCategoryModal(content, categoryId) {
     this.modalService.open(content).result.then((result) => {
@@ -93,10 +94,11 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
       this.newSubCategory.mainCategoryId = categoryId;
       this.addNewSubCategory(this.newSubCategory);
     }, (reason) => {
-      // console.log('reson');
-      // console.log(reason);
+      // Handle Error Here
     });
   }
+
+    // Add Sub Category Function
 
   addNewSubCategory(subCategoryData) {
     this.categoriesService.addSubCategory(subCategoryData).subscribe((result: Category) => {
@@ -108,7 +110,7 @@ export class CategoriesPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  // Open Category Details
+  // Open Category Details Page
 
   openCategoryPage(categoryId) {
     this.router.navigateByUrl(`categories/category/${categoryId}`);

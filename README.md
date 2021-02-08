@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
 
+# App Idea
+
+An angular app preview categories, sub categories and sub categories products, this app allow you to add categories, 
+add sub categories, add products, edit products and delete products
+
+# Important Step
+
+Install [json-server](https://github.com/typicode/json-server) first ,
+Run `npm install -g json-server` , then Run `json-server db.json`
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
